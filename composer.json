@@ -1,0 +1,33 @@
+{
+  "name": "jm-organization/cilaster_cms",
+  "description": "PHP CMS for Web-sites",
+  "type": "metapackage",
+  "keywords": [
+    "engine",
+    "cilaster",
+    "cms",
+    "jm-organization"
+  ],
+  "homepage": "http://www.jm-org.net/portfolio/cilaster",
+  "license": "Apache-2.0",
+  "require": {
+    "php": ">=5.6",
+    "doctrine/orm":"^2.5.9"
+  },
+  "autoload": {
+    "psr-0": {
+      "Doctrine\\ORM\\":"vendor/doctrine/orm/lib",
+      "Doctrine\\DBAL\\":"vendor/doctrine/dbal/lib",
+      "Doctrine\\Common\\Lexer\\":"vendor/doctrine/lexer/lib",
+      "Doctrine\\Common\\Inflector\\":"vendor/doctrine/inflector/lib",
+      "Doctrine\\Common\\Collections\\":"vendor/doctrine/collections/lib"
+    },
+    "psr-4": {
+      "Cilaster\\API\\": "vendor/cilaster/API/",
+      "Cilaster\\Core\\": "vendor/cilaster/Core/",
+      "Cilaster\\DB\\": "vendor/cilaster/DB/",
+      "Cilaster\\MVC\\": "vendor/cilaster/MVC/",
+      "Cilaster\\Rest\\": "vendor/cilaster/Rest/"
+    }
+  }
+}

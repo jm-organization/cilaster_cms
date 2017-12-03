@@ -1,0 +1,60 @@
+@charset "UTF-8"
+
+.install-container
+  position: relative
+  .card
+    margin: 56px 0
+
+.install-alert
+  position: absolute
+  width: 440px
+  top: -150px
+  right: 45px
+  font-size: 80%
+  z-index: 1
+
+footer
+  width: 100%
+  height: 48px
+  background: white
+
+#host-row
+  position: relative
+  &:before
+    content: ':'
+    position: absolute
+    right: -2px
+    top: 34px
+
+.custom-switch
+  position: relative
+  height: 24px
+  width: 40px
+  display: inline-grid
+  background: white
+  margin: 0 7px
+
+  span.rail
+    height: 14px
+    margin: 5px 0
+    border-radius: 6px
+
+  .caret
+    position: absolute
+    height: 24px
+    width: 24px
+    top: 0
+    left: -5px
+    border-radius: 50%
+
+  .input-change
+    left: 25px!important
+    top: 0
+
+  input
+    opacity: 0
+
+.custom-file-control:lang(ru)::before
+  content: "Открыть"
+.custom-file-control:lang(ru)::after
+  content: attr(data-file)
