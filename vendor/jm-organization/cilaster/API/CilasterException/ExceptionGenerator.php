@@ -14,9 +14,6 @@
 namespace Cilaster\API\CilasterException;
 
 
-use Cilaster\Core\Constant;
-use Cilaster\Core\Router;
-
 class ExceptionGenerator {
 	public $exception;
 
@@ -24,7 +21,7 @@ class ExceptionGenerator {
 
 	public function __construct(\Exception $exception) {
 		$this->exception = $exception;
-		$this->view_root = Constant::THEMES_ROOT;
+		$this->view_root = THEMES_ROOT;
 	}
 
 	public function get() {

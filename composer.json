@@ -1,6 +1,6 @@
 {
   "name": "jm-organization/cilaster_cms",
-  "description": "CMS for sites / Build via MVC / povered by Doctrine",
+  "description": "CMS for sites / Build via MVC / powered by Doctrine",
   "type": "project",
   "keywords": [
     "engine",
@@ -23,13 +23,17 @@
       "Doctrine\\Common\\Collections\\":"vendor/doctrine/collections/lib"
     },
     "psr-4": {
-      "Cilaster\\API\\": "vendor/cilaster/API/",
-      "Cilaster\\Core\\": "vendor/cilaster/Core/",
-      "Cilaster\\DB\\": "vendor/cilaster/DB/",
-      "Cilaster\\MVC\\": "vendor/cilaster/MVC/",
-      "Cilaster\\Rest\\": "vendor/cilaster/Rest/",
-      "Cilaster\\Cli\\": "vendor/cilaster/Cli/"
+      "Cilaster\\API\\": "vendor/jm-organization/cilaster/API/",
+      "Cilaster\\Core\\": "vendor/jm-organization/cilaster/Core/",
+      "Cilaster\\DB\\": "vendor/jm-organization/cilaster/DB/",
+      "Cilaster\\MVC\\": "vendor/jm-organization/cilaster/MVC/",
+      "Cilaster\\Rest\\": "vendor/jm-organization/cilaster/Rest/",
+      "Cilaster\\Cli\\": "vendor/jm-organization/cilaster/Cli/",
+      "Module\\": "modules/"
     },
-    "files": ["vcs/cilaster.php"]
+    "files": [
+      "themes/vcs/cilaster.php",
+      "vendor/jm-organization/cilaster/Core/constants.php"
+    ]
   }
 }

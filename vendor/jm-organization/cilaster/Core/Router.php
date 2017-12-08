@@ -20,16 +20,21 @@ use Cilaster\API\Request\Request;
 class Router {
 	const reserve = ['install', 'update', 'rest', 'admin'];
 
-	public static $route = ['module', 'route', 'action', 'controller', 'viewpath', 'content'];
+	public static $route = ['module', 'route', 'action', 'module', 'content'];
 
 	/**
-	 * @param array $route
+	 * @function: setRoute
+	 *
+	 * @documentation:
+	 *
+	 * @param object $route
+	 *
 	 */
-	public static function setRoute($route) {
+	private static function setRoute($route) {
 		self::$route = $route;
 	}
 
-	public static function setContent($content) {
+	private static function setContent($content) {
 		self::$route->content = $content;
 	}
 
@@ -83,19 +88,27 @@ class Router {
 	 * @return bool
 	 */
 	public static function uri_exist() {
-		$routes = new Config('application\routes');
+		$routes = new Config('application/config');
 		$current_route = str_replace('.php', '', self::get_uri());
 
 		if (array_key_exists($current_route, array_flip(self::reserve))) {
-			if ($current_route == 'rest') { /* TODO: rest */ }
+			switch (true) {
+				case ($current_route == 'rest'): $parent = 'rest'; break;
 
-			$route = $routes->get($current_route);
+				case ($current_route == 'install' || $current_route == 'update'): $parent = 'vcs'; break;
+
+				case ($current_route == 'admin'): $parent = 'admin'; break;
+
+				default: $parent = 'default'; break;
+			}
+
+			$route = $routes->get("router/routes/$parent/$current_route");
 			$buffer = [];
 
-			$buffer['module'] = $route['module'];
 			foreach (self::$route as $option) {
 				$buffer[$option] = $route['options'][$option];
 			}
+			$buffer['route'] = ($parent?("$parent/"):'').str_replace(['[', ']', ':action'], ['', '', $buffer['action']], $buffer['route']);
 
 			self::setRoute((object)$buffer);
 
@@ -119,25 +132,31 @@ class Router {
 	 * @throws MvcException
 	 */
 	public static function start() {
-    	$module = self::$route->module;
-
-        $controller = (self::$route->controller).'Controller';
+    	$controller = (self::$route->module).'Controller';
         $action = (self::$route->action).'Action';
 
-        if (empty($module)) {
-            $namespace = "MVC/".self::$route->controller."/$controller";
-            require_once __DIR__ . str_replace('/', '\\', "/../$namespace.php");
-            $app_controller = str_replace('/', '\\', "Cilaster/$namespace");
+        $engine_root = __DIR__.'/../MVC/';
+        switch (true) {
+			case file_exists($engine_root.self::$route->module):
+				require_once $engine_root.self::$route->module."/$controller.php";
 
-            $AppController = new $app_controller();
+				$namespace = "MVC/".self::$route->module."/$controller";
+				$app_controller = str_replace('/', '\\', "Cilaster/$namespace");
+				$AppController = new $app_controller();
 
-			if (method_exists($AppController, $action)) { $content = $AppController->$action(); } else {
-				throw MvcException::UndefinedMethodInController($action, get_class($AppController));
-			}
-        } else {
-			$content = 'TODO';
-            // TODO: add `module` support;
-        }
+				if (method_exists($AppController, $action)) { $content = $AppController->$action(); } else {
+					throw MvcException::UndefinedMethodInController($action, get_class($AppController));
+				}
+				break;
+
+			case file_exists(MODULES_ROOT.'/'.self::$route->module):
+				$content = 'TODO';
+
+				// TODO: add `module` support;
+				break;
+
+			default: throw MvcException::UndefinedModule(self::$route->module); break;
+		}
 
         self::setContent($content);
     }

@@ -13,9 +13,6 @@ namespace Cilaster\MVC\Application;
 
 
 use Cilaster\API\Model;
-use Cilaster\Core\Constant;
-use Cilaster\DB\Connect\DBConnect;
-use Cilaster\DB\Tables\Settings;
 
 class ApplicationModel extends Model
 {
@@ -24,21 +21,21 @@ class ApplicationModel extends Model
 			'PHP версии 5.6 и выше' => (phpversion() >= 5.6)?phpversion():false,
 			'Поддержка PDO' => (class_exists('PDO'))?true:false,
 			'Работа с <b>Cookies</b>' => @ini_get('session.use_cookies'),
-			'Чтение <span class="text-secondary">/modules/</span>' => is_readable(Constant::MODULES_ROOT),
-			'Чтение <span class="text-secondary">/themes/</span>' => is_readable(Constant::THEMES_ROOT),
-			'Чтение и запись <span class="text-secondary">/configs/</span>' => is_writable(Constant::CONFIG_ROOT) || !is_readable(Constant::CONFIG_ROOT),
-			'Чтение и запись <span class="text-secondary">/includes/</span>' => is_writable(Constant::INCLUDE_ROOT) || !is_readable(Constant::INCLUDE_ROOT),
-			'Создание дополнительных папок средствами PHP' => mkdir( Constant::MAIN_ROOT . '\test' ),
+			'Чтение <span class="text-secondary">/modules/</span>' => is_readable(MODULES_ROOT),
+			'Чтение <span class="text-secondary">/themes/</span>' => is_readable(THEMES_ROOT),
+			'Чтение и запись <span class="text-secondary">/configs/</span>' => is_writable(CONFIG_ROOT) || !is_readable(CONFIG_ROOT),
+			'Чтение и запись <span class="text-secondary">/includes/</span>' => is_writable(INCLUDES_ROOT) || !is_readable(INCLUDES_ROOT),
+			'Создание дополнительных папок средствами PHP' => mkdir( MAIN_ROOT . '\test' ),
 			//'Создание файлов средствами PHP' => '',
-			'Удаление папок средствами PHP' => rmdir( Constant::MAIN_ROOT . '\test' ),
+			'Удаление папок средствами PHP' => rmdir( MAIN_ROOT . '\test' ),
 			//'Удаление файлов средствами PHP' => '',
 		];
 	}
 
 	public function saveDBSettings( $settings ) {
-		$pattern = file_get_contents( Constant::CONFIG_ROOT . '\data_base_config_pattern.txt' );
+		$pattern = file_get_contents( CONFIG_ROOT . '\data_base_config_pattern.txt' );
 
-		file_put_contents( Constant::CONFIG_ROOT . '\data_base_config.php', sprintf( $pattern,
+		file_put_contents( CONFIG_ROOT . '\data_base_config.php', sprintf( $pattern,
 			$settings['host'],
 			$settings['port'],
 			$settings['database'],
@@ -58,7 +55,7 @@ class ApplicationModel extends Model
 	 */
 	public function createCMSTables() {
 		$db_connect = new DBConnect();
-		$cilsater_tables = file_get_contents(Constant::MAIN_ROOT.'\manager\cilaster_db.sql');
+		$cilsater_tables = file_get_contents(constants::MAIN_ROOT.'\manager\cilaster_db.sql');
 		$db = $db_connect->connect();
 		$date_time = new \DateTime();
 
@@ -94,7 +91,7 @@ class ApplicationModel extends Model
 	}
 
 	public function installFinish() {
-		if (file_put_contents(Constant::MAIN_ROOT.'\install\cilaster.php', '<?php define( \'IS_INSTALLED\', true );')) {
+		if (file_put_contents(constants::MAIN_ROOT.'\install\cilaster.php', '<?php define( \'IS_INSTALLED\', true );')) {
 			return true;
 		}
 	}

@@ -14,7 +14,7 @@ namespace Cilaster\API;
 
 
 use Cilaster\Core\Config;
-use Cilaster\Core\Constant;
+use Cilaster\Core\constants;
 use Cilaster\Core\Router;
 use Cilaster\DB\Tools\DBConnect;
 

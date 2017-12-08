@@ -12,12 +12,13 @@
 namespace Cilaster\MVC\Application;
 
 
+use Cilaster\API\Html\TableCreator\Table;
 use Cilaster\API\View;
 
 class ApplicationView extends View {
 
 	public function renderValidationTable(array $data) {
-		$table = new \Cilaster\API\Html\TableCreator\Table([
+		$table = new Table([
 			'table' => 'table table-sm',
 			'thead' => [
 				'thead.thead-default',
@@ -34,7 +35,7 @@ class ApplicationView extends View {
 			],
 		]);
 
-		return $table->create($data)->render();
+		$table->create($data)->render();
 	}
 	
 }

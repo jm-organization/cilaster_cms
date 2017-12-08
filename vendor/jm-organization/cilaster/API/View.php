@@ -12,15 +12,12 @@
 namespace Cilaster\API;
 
 
-use Cilaster\API\CilasterException\CException;
-use Cilaster\API\AuthManager\Identity;
 use Cilaster\API\CilasterException\ExceptionGenerator;
 use Cilaster\API\CilasterException\MvcException;
 use Cilaster\API\Http\Mvc;
 use Cilaster\API\Http\Server;
 use Cilaster\API\Request\GetRequest;
 use Cilaster\Core\Config;
-use Cilaster\Core\Constant;
 use Cilaster\Core\Router;
 
 class View {
@@ -68,10 +65,11 @@ class View {
 	 * View constructor.
 	 *
 	 * 	Инициализация вида приложения.
-	 *
-	 * @param string $theme
 	 */
-	public function __construct($theme = 'default') {
+	public function __construct() {
+		$route_root = explode('/', Router::$route->route)[0];
+		$theme = (new Config('application'))->get("$route_root/layout");
+
 		// TODO: View Port, metatags;
 
 		$this->setTitle($this->generateTitle());
@@ -95,11 +93,11 @@ class View {
 		$config_title = trim($config);
 		$this->setShortTitle(($config_title != '')?$config_title:'Cilaster CMS');
 
+		$page_config_title = Router::$route->title;
+
 		if (!IS_INSTALLED) {
 			$page_config_title = str_replace('{object}', (new GetRequest())->content()->get('product'), Router::$route->title);
 		}
-
-		$page_config_title = Router::$route->title;
 
 		$page_title = (($page_config_title)?$page_config_title.' | ':'').$this->getShortTitle();
 
@@ -116,19 +114,22 @@ class View {
 	 * @throws \Exception
 	 */
 	public function generate() {
-		$layout = str_replace('\..', '', $this->getTheme()).'_layout';
+		$layout = $this->getTheme().'_layout';
+		$layout = THEMES_ROOT.'/'.$this->getTheme()."/$layout.phtml";
 
 		global $content;
 		try {
 			Router::start();
 
 			$content = Router::getContent();
-		} catch (\Exception $e) {
-			$content = (new ExceptionGenerator($e))->get();
+
+			if (!file_exists($layout)) { die('layout not found'); }
+		} catch (\Exception $exception) {
+			$content = (new ExceptionGenerator($exception))->get();
 		}
 
 		if ($layout != 'no_layout') {
-			require Constant::THEMES_ROOT.$this->getTheme().$layout.".php";
+			require $layout;
 		}
 	}
 
@@ -141,7 +142,7 @@ class View {
 	 * @return mixed
 	 */
 	public function generateErrorPage() {
-		return require_once Constant::THEMES_ROOT.'\\'.$this->getTheme().'\\404.html';
+		return require_once THEMES_ROOT.'\\'.$this->getTheme().'\\404.html';
 	}
 
 	/**
@@ -158,9 +159,8 @@ class View {
 	 */
 	public function basePath($path = null) {
 		$route = str_replace('.php', '', trim(Router::$route->route, '/'));
-		$server = new Server();
 
-		$url_path = "//".$server->getName();
+		$url_path = "//".Server::getName();
 		$dir = ($route == 'install' || $route == 'update')?'vcs':'themes';
 		$theme = ($route != 'install' && $route != 'update')?($this->getTheme().'/'):'';
 		$file_path = '/'."$dir/".$theme."$path";
@@ -171,7 +171,7 @@ class View {
 	private function rootPath() { return $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']."/themes"; }
 
 	public function bootstrapPath($file) {
-		$bootstrap_root = Constant::THEMES_ROOT.'_bootstrap/'.$file;
+		$bootstrap_root = THEMES_ROOT.'_bootstrap/'.$file;
 
 		if (!file_exists($bootstrap_root)) return $this->basePath();
 
@@ -179,7 +179,7 @@ class View {
 	}
 
 	public function pluginsPath($file) {
-		$plugins_root = Constant::THEMES_ROOT.'_plugins/'.$file;
+		$plugins_root = THEMES_ROOT.'_plugins/'.$file;
 
 		if (!file_exists($plugins_root)) return $this->basePath();
 
@@ -190,25 +190,25 @@ class View {
 	 * @function: render
 	 *
 	 * @documentation:
-	 * 	Запускает процес отрисовки пользовательского интерфейса.
+	 *    Запускает процес отрисовки пользовательского интерфейса.
 	 * В качестве принимающих параметров принимает ассоциативный масив с данными.
 	 * Далее эти данные могут будуть выведены на пользовательских страницах.
 	 *
-	 * 	Используеться как инструмент для отрисовки Форм и прочих данных,
+	 *    Используеться как инструмент для отрисовки Форм и прочих данных,
 	 * пришедших с сервера.
 	 *
 	 * @param $view
 	 * @param array $variables
 	 *
 	 * @return string
+	 * @throws MvcException
 	 */
-	public function render($view, $variables = []) {
+	public function render($view = null, $variables = []) {
 		if ($view) {
-			$view_root = Constant::MAIN_ROOT.'/';
-			$view_path = Router::$route->viewpath."/$view.phtml";
+			$view_path = THEMES_ROOT."/{$this->getTheme()}/$view.phtml";
 
-			if (!file_exists($view_root.$view_path)) {
-				$method = Router::$route->controller.'::'.Router::$route->action.'()';
+			if (!file_exists($view_path)) {
+				$method = Router::$route->module.'Controller::'.Router::$route->action.'()';
 
 				throw MvcException::UndefinedViewRoute($view_path, $method);
 			} else {
@@ -220,13 +220,19 @@ class View {
 					}
 				}
 
+				global $mvc, $view;
+				$ModuleView = '\\Cilaster\\MVC\\'.Router::$route->module.'\\'.Router::$route->module.'View';
+				if (!class_exists($ModuleView)) {
+					$ModuleView = '\\Module\\'.Router::$route->module.'\\'.Router::$route->module.'View';
+				}
+				$view = new $ModuleView();
 				$mvc = new Mvc();
 
-				include_once $view_root.$view_path;
+				include_once $view_path;
 			}
 
 			return ob_get_clean();
-		}
+		} else throw MvcException::DisplayResourceWasNotPassed();
 	}
 
 	/**
@@ -243,22 +249,20 @@ class View {
 	 * @throws \Exception
 	 */
 	public function insert($file_path, $file_extension) {
-		$root = Constant::THEMES_ROOT.'/'.$this->getTheme();
-		$reserve = ['install', 'update'];
-		$route = str_replace('/', '',
-			str_replace('.php', '', Router::$route->route)
-		);
-
-		if (array_key_exists($route, array_flip($reserve))) {
-			$root = Constant::MAIN_ROOT.'/vcs';
-		}
-
-		$path = str_replace('/', '\\', "$root/_includes/$file_path$file_extension");
+		$path = str_replace('/', '\\', INCLUDES_ROOT."/$file_path$file_extension");
 
 		try {
 			if (!file_exists($path)) {
 				throw MvcException::InsertedFileNotFound($path);
 			}
+
+			global $mvc, $view;
+			$ModuleView = '\\Cilaster\\MVC\\'.Router::$route->module.'\\'.Router::$route->module.'View';
+			if (!class_exists($ModuleView)) {
+				$ModuleView = '\\Module\\'.Router::$route->module.'\\'.Router::$route->module.'View';
+			}
+			$view = new $ModuleView();
+			$mvc = new Mvc();
 
 			include $path;
 		} catch (\Exception $e) {
@@ -280,53 +284,5 @@ class View {
 
 			return '<nav>'.$nav_bar.'</nav>';
 		}
-	}
-
-	public function currentRoute($params=null) {
-		$uri = Router::get_uri();
-
-		if (!is_string($uri) && $uri == 'index') {
-			return $uri;
-		} elseif (is_string($uri)) {
-			if (isset( $params )) {
-				switch ($params) {
-					case 'first':
-						return explode('/', $uri)[0];
-						break;
-					case 'last':
-						return max(explode('/', $uri));
-						break;
-					default:
-						if (is_int( $params )) {
-							return explode( '/', $uri )[ $params ];
-						} else {
-							return false;
-						}
-						break;
-				}
-			} else {
-				return max(explode('/', $uri));
-			}
-		} else {
-			return false;
-		}
-	}
-
-	public function identity() {
-		return new Identity();
-	}
-
-	public function adminBar() {
-		// TODO: Проверка прав пользователя
-		$admin_bar = 'admin-panel/admin_bar_layout.php';
-
-		if (file_exists(Constant::MAIN_ROOT.'\\'.$admin_bar)) {
-			return "<iframe width='100%' height='32px' src='$admin_bar' class='admin-bar-frame'><div class='admin-bar'>
-						<p>К сожалению, ваш браузер не подерживает <code>&lt;iframe&gt;</code>.</p>
-						<p style='float: right;'><a href='/themes/admin/path/index.php?admin' target='_blank'>Панель администратора</a></p>
-					</div></iframe>";
-		}
-
-		return null;
 	}
 }

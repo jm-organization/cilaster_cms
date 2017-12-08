@@ -12,8 +12,6 @@
 namespace Cilaster\API\I18n;
 
 
-use Cilaster\Core\Constant;
-
 class Phrases {
 	public $locale;
 
@@ -44,7 +42,7 @@ class Phrases {
 	}
 
 	public function searchId( $phrases_id ) {
-		$locale_folder = Constant::LOCALES_ROOT;
+		$locale_folder = I18N_ROOT;
 		$ids_array = parse_ini_file($locale_folder.'\\'.$this->getLocale().'.ini');
 
 		if ($ids_array[$phrases_id]) {

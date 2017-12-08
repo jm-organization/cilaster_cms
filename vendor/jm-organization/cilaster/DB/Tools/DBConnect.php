@@ -13,7 +13,7 @@ namespace Cilaster\DB\Tools;
 
 
 use Cilaster\Core\Config;
-use Cilaster\Core\Constant;
+use Cilaster\Core\constants;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Connection;

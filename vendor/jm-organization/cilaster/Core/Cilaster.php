@@ -23,8 +23,10 @@ class Cilaster {
             ]));
         }
 
-        $view = new View((new Config('application'))->get('layout'));
-    	if (!Router::uri_exist()) { $view->generateErrorPage(); }
+        $uri_exist = Router::uri_exist();
+
+        $view = new View();
+    	if (!$uri_exist) { $view->generateErrorPage(); }
     	$view->generate();
     }
 
@@ -35,8 +37,10 @@ class Cilaster {
     }
 
     public static function install() {
-        $view = new View('\..\vcs');
-		if (!Router::uri_exist()) { $view->generateErrorPage(); }
+		$uri_exist = Router::uri_exist();
+
+		$view = new View();
+		if (!$uri_exist) { $view->generateErrorPage(); }
 		$view->generate();
     }
 }

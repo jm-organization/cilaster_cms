@@ -17,7 +17,6 @@ use Cilaster\API\AuthManager\Registration;
 use Cilaster\API\Controller;
 use Cilaster\API\I18n\Language;
 use Cilaster\API\I18n\Phrases;
-use Cilaster\Core\Constant;
 use Cilaster\API\Request\PostRequest;
 use Cilaster\API\Http\Mvc;
 
@@ -26,6 +25,8 @@ class ApplicationController extends Controller {
 
 	public function __construct() {
 		$this->mvc = new Mvc();
+
+		return parent::__construct();
 	}
 
 	public function indexAction() {
@@ -141,7 +142,7 @@ class ApplicationController extends Controller {
 							"theme" => "default",
 							"language" => $connect->get('site-language'),
 						];
-						$upload_file = Constant::MAIN_ROOT .'\\'. basename($_FILES['site-logotype']['name']);
+						$upload_file = MAIN_ROOT .'\\'. basename($_FILES['site-logotype']['name']);
 
 						if ($model->fillSettings( $settings )) {
 							if (!file_exists( $upload_file )) move_uploaded_file($_FILES['site-logotype']['tmp_name'], $upload_file);

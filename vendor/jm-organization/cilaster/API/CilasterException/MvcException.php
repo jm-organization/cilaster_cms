@@ -26,4 +26,12 @@ class MvcException extends \Exception {
 	public static function InsertedFileNotFound($path = '') {
 		return new self("Insert file in path $path not found", ExceptionCodes::WARNING);
 	}
+
+	public static function DisplayResourceWasNotPassed() {
+		return new self("The display resource was not passed", ExceptionCodes::FATAL);
+	}
+
+	public static function UndefinedModule($module) {
+		return new self("Unknown module $module. This wasn't found in `modules/` an `cilaster/MVC/`");
+	}
 }

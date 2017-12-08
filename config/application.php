@@ -10,7 +10,9 @@
  */
 
 return [
-	'layout' => 'default',
+	'default' => [ 'layout' => 'default' ],
+	'vcs' => [ 'layout' => 'vcs' ],
+	'admin' => [ 'layout' => 'admin' ],
 
 	'about' => [
 		'title' => 'Cilaster CMS',

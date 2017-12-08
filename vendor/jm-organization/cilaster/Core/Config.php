@@ -9,8 +9,6 @@
 namespace Cilaster\Core;
 
 
-use Cilaster\DB\Tables\TablesManager;
-
 class Config {
 	/**
 	 * @var
@@ -57,7 +55,7 @@ class Config {
 	 */
 	public function __construct($root = 'application') {
 		$root = preg_replace('/\.[a-z]*/', '', $root);
-		$file = Constant::CONFIG_ROOT.'/'.$root.'.php';
+		$file = CONFIG_ROOT.'/'.$root.'.php';
 		$file = str_replace('/', '\\', $file);
 
 		if (!file_exists($file)) { $this->setConfigs([]); }
