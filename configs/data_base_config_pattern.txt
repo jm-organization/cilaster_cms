@@ -1,9 +1,0 @@
-<?php return [
-	'host' => '%s',
-	'port' => '%s',
-	'db' => '%s',
-	'db-type' => '%s',
-	'charset' => '%s',
-	'user' => '%s',
-	'password' => '%s',
-];

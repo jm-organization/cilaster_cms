@@ -1,7 +1,7 @@
 {
   "name": "jm-organization/cilaster_cms",
-  "description": "PHP CMS for Web-sites",
-  "type": "metapackage",
+  "description": "CMS for sites / Build via MVC / povered by Doctrine",
+  "type": "project",
   "keywords": [
     "engine",
     "cilaster",
@@ -11,8 +11,8 @@
   "homepage": "http://www.jm-org.net/portfolio/cilaster",
   "license": "Apache-2.0",
   "require": {
-    "php": ">=5.6",
-    "doctrine/orm":"^2.5.9"
+    "php": "^5.6",
+    "doctrine/orm":"2.5.*"
   },
   "autoload": {
     "psr-0": {
@@ -27,7 +27,9 @@
       "Cilaster\\Core\\": "vendor/cilaster/Core/",
       "Cilaster\\DB\\": "vendor/cilaster/DB/",
       "Cilaster\\MVC\\": "vendor/cilaster/MVC/",
-      "Cilaster\\Rest\\": "vendor/cilaster/Rest/"
-    }
+      "Cilaster\\Rest\\": "vendor/cilaster/Rest/",
+      "Cilaster\\Cli\\": "vendor/cilaster/Cli/"
+    },
+    "files": ["vcs/cilaster.php"]
   }
 }

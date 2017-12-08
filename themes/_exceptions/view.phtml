@@ -1,0 +1,73 @@
+<?php
+
+switch ($exception->code) {
+	case 0:
+		$color = 'danger';
+		$title = 'Fatal Error #'.$exception->code;
+		$icon_class = 'icon-fatal';
+		break;
+
+	case 8:
+		$color = 'warning';
+		$title = 'Warning #'.$exception->code;
+		$icon_class = 'icon-warning';
+		break;
+
+	case 16:
+		$color = 'info';
+		$title = 'Notice #'.$exception->code;
+		$icon_class = 'icon-notice';
+		break;
+
+	case 64:
+		$color = 'dark';
+		$title = 'Syntax error #'.$exception->code;
+		$icon_class = 'syntax-html';
+		break;
+
+	case 72:
+		$color = 'dark';
+		$title = 'Syntax error #'.$exception->code;
+		$icon_class = 'syntax-js';
+		break;
+
+	case 128:
+		$color = 'dark';
+		$title = 'Syntax error #'.$exception->code;
+		$icon_class = 'syntax-php';
+		break;
+
+	case 192:
+		$color = 'dark';
+		$title = 'Syntax error #'.$exception->code;
+		$icon_class = 'syntax-sql';
+		break;
+
+	default:
+		$color = 'secondary';
+		$title = 'Unknown error';
+		$icon_class = '';
+		break;
+}
+
+?>
+
+<div class="card exception-card <?="border-$color"?>">
+    <div class="card-body">
+		<div class="float-left"><span class="<?=$icon_class?>"></span></div>
+		<div class="float-right">
+            <h4 class="card-title <?="text-$color"?>">
+                <?=$title?>
+                <small class="exception-file text-muted d-block">In file: <?=$exception->file?>, on line: #<?=$exception->line?></small>
+            </h4>
+            <p class="card-text"><?=$exception->message?></p>
+			<?php if ($exception->previous) { ?>
+                <hr>
+                <a>Previous error</a>
+			<?php } ?>
+        </div>
+	</div>
+	<div class="card-footer">
+		<span class="exception-stack"><pre><?=$exception->stringtrace?></pre></span>
+	</div>
+</div>

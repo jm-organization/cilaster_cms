@@ -9,8 +9,6 @@
  * @documentation:
  */
 
-require_once 'Bootstrap.php';
+require_once __DIR__.'/Bootstrap.php';
 
-use Core\Cilaster;
-
-Cilaster::run();
+\Cilaster\Core\Cilaster::run();

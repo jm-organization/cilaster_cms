@@ -9,8 +9,13 @@
  * @documentation:
  */
 
-require_once 'Bootstrap.php';
+header('Content-Type: application/json; charset=utf-8');
+$loader = require_once __DIR__.'/vendor/autoload.php';
 
-use Rest\Rest;
+use Cilaster\DB\Tools\EntityManager;
 
-Rest::start();
+global $entityManager;
+$configs = require __DIR__ . '/config/application/database.php';
+$entityManager = (new EntityManager($configs))->create()->getEntityManager();
+
+\Cilaster\Rest\Rest::start();
