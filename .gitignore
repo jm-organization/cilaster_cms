@@ -6,18 +6,6 @@
 #*.iml
 #out
 #gen
-modules/
-i18n/
-config/
-themes/
-.htaccess
-Bootstrap.php
-favicon.ico
-index.php
-install.php
-admin.php
-update.php
-rest.php
 
 ### Sass template
 .sass-cache/
