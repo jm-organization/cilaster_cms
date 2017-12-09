@@ -6,7 +6,7 @@
  * @Time: 12:52
  */
 
-require_once __DIR__.'/Bootstrap.php';
+require_once __DIR__ . '/Bootstrap.php';
 
 \Cilaster\Core\Cilaster::install();
 

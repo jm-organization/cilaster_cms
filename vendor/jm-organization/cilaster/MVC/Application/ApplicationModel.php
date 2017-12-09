@@ -18,17 +18,15 @@ class ApplicationModel extends Model
 {
 	public function validServer() {
 		return [
-			'PHP версии 5.6 и выше' => (phpversion() >= 5.6)?phpversion():false,
-			'Поддержка PDO' => (class_exists('PDO'))?true:false,
-			'Работа с <b>Cookies</b>' => @ini_get('session.use_cookies'),
-			'Чтение <span class="text-secondary">/modules/</span>' => is_readable(MODULES_ROOT),
-			'Чтение <span class="text-secondary">/themes/</span>' => is_readable(THEMES_ROOT),
-			'Чтение и запись <span class="text-secondary">/configs/</span>' => is_writable(CONFIG_ROOT) || !is_readable(CONFIG_ROOT),
-			'Чтение и запись <span class="text-secondary">/includes/</span>' => is_writable(INCLUDES_ROOT) || !is_readable(INCLUDES_ROOT),
-			'Создание дополнительных папок средствами PHP' => mkdir( MAIN_ROOT . '\test' ),
-			//'Создание файлов средствами PHP' => '',
-			'Удаление папок средствами PHP' => rmdir( MAIN_ROOT . '\test' ),
-			//'Удаление файлов средствами PHP' => '',
+			[1, 'PHP версии 5.6 и выше', (phpversion() >= 5.6)?true:false, phpversion()],
+			[2, 'Поддержка PDO', (class_exists('PDO'))?true:false, null],
+			[3, 'Работа с <b>Cookies</b>', @ini_get('session.use_cookies'), null],
+			[4, 'Чтение <span class="text-secondary">/modules/</span>', is_readable(MODULES_ROOT), null],
+			[5, 'Чтение <span class="text-secondary">/themes/</span>', is_readable(THEMES_ROOT), null],
+			[6, 'Чтение и запись <span class="text-secondary">/configs/</span>', is_writable(CONFIG_ROOT) || !is_readable(CONFIG_ROOT), null],
+			[7, 'Чтение и запись <span class="text-secondary">/includes/</span>', is_writable(INCLUDES_ROOT) || !is_readable(INCLUDES_ROOT), null],
+			[8, 'Создание дополнительных папок средствами PHP', mkdir(MAIN_ROOT.'\test'), null],
+			[9, 'Удаление папок средствами PHP', rmdir(MAIN_ROOT.'\test'), null],
 		];
 	}
 

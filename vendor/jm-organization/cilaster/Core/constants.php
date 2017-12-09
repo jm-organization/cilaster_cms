@@ -17,3 +17,7 @@ define("BOOTSTRAP_ROOT", THEMES_ROOT.'/_bootstrap');
 define("INCLUDES_ROOT", THEMES_ROOT.'/_includes');
 define("EXCEPTIONS_ROOT", THEMES_ROOT.'/_exceptions');
 define("PLUGINS_ROOT", THEMES_ROOT.'/_plugins');
+
+function callback() {
+	return null;
+}
