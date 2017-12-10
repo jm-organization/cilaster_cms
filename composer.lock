@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "facfdcd0197e54ad51a0df2558109af5",
+    "content-hash": "565d3f101b9ac6d8cd9e1d67dbcbc879",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -605,6 +605,60 @@
                 "orm"
             ],
             "time": "2017-11-27T23:25:55+00:00"
+        },
+        {
+            "name": "jm-organization/cilaster_framework",
+            "version": "0.5.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jm-organization/cilaster_framework.git",
+                "reference": "d3ecd24421865ece37d79f17ceee36fe501ccd0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jm-organization/cilaster_framework/zipball/d3ecd24421865ece37d79f17ceee36fe501ccd0c",
+                "reference": "d3ecd24421865ece37d79f17ceee36fe501ccd0c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "2.5.*",
+                "php": "^5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\ORM\\": "vendor/doctrine/orm/lib",
+                    "Doctrine\\DBAL\\": "vendor/doctrine/dbal/lib",
+                    "Doctrine\\Common\\Lexer\\": "vendor/doctrine/lexer/lib",
+                    "Doctrine\\Common\\Inflector\\": "vendor/doctrine/inflector/lib",
+                    "Doctrine\\Common\\Collections\\": "vendor/doctrine/collections/lib"
+                },
+                "psr-4": {
+                    "Cilaster\\API\\": "API/",
+                    "Cilaster\\Core\\": "Core/",
+                    "Cilaster\\DB\\": "DB/",
+                    "Cilaster\\MVC\\": "MVC/",
+                    "Cilaster\\Rest\\": "Rest/",
+                    "Cilaster\\Cli\\": "Cli/"
+                },
+                "files": [
+                    "cilaster.php",
+                    "Core/constants.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "PHP Framework",
+            "homepage": "http://www.jm-org.net/portfolio/cilaster",
+            "keywords": [
+                "cilaster",
+                "framework",
+                "jm-organization",
+                "php"
+            ],
+            "time": "2017-12-10T12:31:49+00:00"
         },
         {
             "name": "psr/log",

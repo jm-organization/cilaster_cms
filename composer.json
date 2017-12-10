@@ -1,6 +1,6 @@
 {
   "name": "jm-organization/cilaster_cms",
-  "description": "CMS for sites / Build via MVC / powered by Doctrine",
+  "description": "CMS for sites / powered by Cilaster Framework",
   "type": "project",
   "keywords": [
     "engine",
@@ -9,31 +9,9 @@
     "jm-organization"
   ],
   "homepage": "http://www.jm-org.net/portfolio/cilaster",
-  "license": "Apache-2.0",
+  "license": "GPL-3.0",
   "require": {
     "php": "^5.6",
-    "doctrine/orm":"2.5.*"
-  },
-  "autoload": {
-    "psr-0": {
-      "Doctrine\\ORM\\":"vendor/doctrine/orm/lib",
-      "Doctrine\\DBAL\\":"vendor/doctrine/dbal/lib",
-      "Doctrine\\Common\\Lexer\\":"vendor/doctrine/lexer/lib",
-      "Doctrine\\Common\\Inflector\\":"vendor/doctrine/inflector/lib",
-      "Doctrine\\Common\\Collections\\":"vendor/doctrine/collections/lib"
-    },
-    "psr-4": {
-      "Cilaster\\API\\": "vendor/jm-organization/cilaster/API/",
-      "Cilaster\\Core\\": "vendor/jm-organization/cilaster/Core/",
-      "Cilaster\\DB\\": "vendor/jm-organization/cilaster/DB/",
-      "Cilaster\\MVC\\": "vendor/jm-organization/cilaster/MVC/",
-      "Cilaster\\Rest\\": "vendor/jm-organization/cilaster/Rest/",
-      "Cilaster\\Cli\\": "vendor/jm-organization/cilaster/Cli/",
-      "Module\\": "modules/"
-    },
-    "files": [
-      "themes/vcs/cilaster.php",
-      "vendor/jm-organization/cilaster/Core/constants.php"
-    ]
+    "jm-organization/cilaster_framework": "0.5.*"
   }
 }

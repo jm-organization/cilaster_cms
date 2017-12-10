@@ -9,7 +9,7 @@
  * @documentation: 
  */
 
-namespace Cilaster\MVC\Application;
+namespace Application;
 
 
 use Cilaster\API\AuthManager\Identity;
