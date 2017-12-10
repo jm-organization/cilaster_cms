@@ -87,7 +87,7 @@ class View {
 	 *
 	 * @return string
 	 */
-	public function generateTitle() {
+	private function generateTitle() {
 		$config = (new Config('application'))->get('title');
 
 		$config_title = trim($config);
@@ -168,22 +168,32 @@ class View {
 		return $url_path.(($path)?$file_path:'');
 	}
 
-	private function rootPath() { return $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME']."/themes"; }
+	private function rootPath() { return "//".Server::getName()."/themes/"; }
+
+	private function isExistExtension($extension_root) {
+		$bootstrap_root = THEMES_ROOT.$extension_root;
+
+		if (!file_exists($bootstrap_root)) return false;
+
+		return true;
+	}
 
 	public function bootstrapPath($file) {
-		$bootstrap_root = THEMES_ROOT.'_bootstrap/'.$file;
+		if (!$this->isExistExtension('_bootstrap/'.$file)) { return $this->basePath(); }
 
-		if (!file_exists($bootstrap_root)) return $this->basePath();
+		return $this->rootPath().'_bootstrap/'.$file;
+	}
 
-		return $this->rootPath().$file;
+	public function semanticPath($file) {
+		if (!$this->isExistExtension('_semantic/'.$file)) { return $this->basePath(); }
+
+		return $this->rootPath().'_semantic/'.$file;
 	}
 
 	public function pluginsPath($file) {
-		$plugins_root = THEMES_ROOT.'_plugins/'.$file;
+		if (!$this->isExistExtension('_plugins/'.$file)) { return $this->basePath(); }
 
-		if (!file_exists($plugins_root)) return $this->basePath();
-
-		return $this->rootPath().$file;
+		return $this->rootPath().'_plugins/'.$file;
 	}
 
 	/**

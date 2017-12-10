@@ -1,95 +1,26 @@
-@charset "UTF-8";
-.install-alert {
-  position: absolute !important;
-  width: 440px;
-  top: -150px;
-  right: 45px;
-  font-size: 80%;
-  z-index: 1; }
+/*
+* Cilaster Stylesheets
+*
+* Support:
+*   - Semantic UI
+*   - Bootstrap 4
+*
+* @e-mail: vany.58.98.2013@gmail.com
+* @author: Magicfar4 aka Magicmen
+*/
+.notifyer {
+  position: absolute;
+  top: -250px;
+  z-index: 10;
+  width: auto;
+  max-width: 400px; }
 
-.install-container {
-  position: relative; }
-  .install-container .card {
-    margin: 56px 0; }
-    .install-container .card #host-row {
-      position: relative; }
-      .install-container .card #host-row:before {
-        content: ":";
-        position: absolute;
-        right: -2px;
-        top: 34px; }
-  .install-container .exception-card .card-body .float-left {
-    width: 75px;
-    height: 75px;
-    margin-right: 10px; }
-    .install-container .exception-card .card-body .float-left span.icon-fatal,
-    .install-container .exception-card .card-body .float-left span.icon-warning,
-    .install-container .exception-card .card-body .float-left span.icon-notice,
-    .install-container .exception-card .card-body .float-left span.syntax-html,
-    .install-container .exception-card .card-body .float-left span.syntax-js,
-    .install-container .exception-card .card-body .float-left span.syntax-php,
-    .install-container .exception-card .card-body .float-left span.syntax-sql {
-      height: 75px;
-      width: 75px;
-      background-position-x: 0;
-      background-position-y: 0;
-      background-size: cover;
-      margin: 0;
-      display: inline-block; }
-    .install-container .exception-card .card-body .float-left span.icon-fatal {
-      background-image: url("/themes/_exceptions/icon-fatal.png"); }
-    .install-container .exception-card .card-body .float-left span.icon-warning {
-      background-image: url("/themes/_exceptions/icon-warning.png"); }
-    .install-container .exception-card .card-body .float-left span.icon-notice {
-      background-image: url("/themes/_exceptions/icon-notice.png"); }
-    .install-container .exception-card .card-body .float-left span.syntax-html {
-      background-image: url("/themes/_exceptions/syntax/html.png"); }
-    .install-container .exception-card .card-body .float-left span.syntax-js {
-      background-image: url("/themes/_exceptions/syntax/js.png"); }
-    .install-container .exception-card .card-body .float-left span.syntax-php {
-      background-image: url("/themes/_exceptions/syntax/php.png"); }
-    .install-container .exception-card .card-body .float-left span.syntax-sql {
-      background-image: url("/themes/_exceptions/syntax/sql.png"); }
-  .install-container .exception-card .card-body .float-right {
-    width: calc(100% - 85px);
-    min-height: 75px;
-    margin: 0; }
-    .install-container .exception-card .card-body .float-right h4 > small {
-      font-size: 65%; }
+.install_interface {
+  margin-bottom: 4rem !important; }
 
 footer {
-  width: 100%;
-  height: 48px;
-  background: white; }
-
-.custom-switch {
-  position: relative;
-  height: 24px;
-  width: 40px;
-  display: inline-grid;
-  background: white;
-  margin: 0 7px; }
-  .custom-switch span.rail {
-    height: 14px;
-    margin: 5px 0;
-    border-radius: 6px; }
-  .custom-switch .caret {
-    position: absolute;
-    height: 24px;
-    width: 24px;
-    top: 0;
-    left: -5px;
-    border-radius: 50%; }
-  .custom-switch .input-change {
-    left: 25px !important;
-    top: 0; }
-  .custom-switch input {
-    opacity: 0; }
-
-.custom-file-control:lang(ru)::before {
-  content: "Открыть"; }
-
-.custom-file-control:lang(ru)::after {
-  content: attr(data-file); }
+  height: 3rem;
+  background: #fff;
+  width: 100%; }
 
 /*# sourceMappingURL=install.css.map */

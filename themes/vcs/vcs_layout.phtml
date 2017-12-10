@@ -10,26 +10,23 @@
 
 		<!-- head::css -->
 		<link rel="stylesheet" href="<?=$this->basePath('css/install.css')?>" />
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="<?=$this->basePath('_plugins/image-crop/css/imgareaselect-default.css')?>" />
+		<link rel="stylesheet" href="<?=$this->semanticPath('semantic.min.css')?>" />
 
         <!-- head::js -->
-		<script type="text/javascript" src="<?=$this->basePath('js/jquery.min.js')?>" ></script>
-		<script type="text/javascript" src="<?=$this->basePath('js/popper.min.js')?>" ></script>
-		<script type="text/javascript" src="<?=$this->basePath('_bootstrap/js/_bootstrap.min.js')?>" ></script>
-		<script type="text/javascript" src="<?=$this->basePath('js/jquery.cookie.js')?>" ></script>
-		<script type="text/javascript" src="<?=$this->basePath('_plugins/image-crop/scripts/jquery.imgareaselect.pack.js')?>"></script>
+		<script type="text/javascript" src="<?=$this->pluginsPath('jquery.min.js')?>"></script>
+        <script type="text/javascript" src="<?=$this->pluginsPath('jquery.cookie.js')?>"></script>
+		<script type="text/javascript" src="<?=$this->semanticPath('semantic.min.js')?>"></script>
 
     </head>
-	<body>
+	<body class="grid">
 
-		<div class="install-container container">
-			<?php echo $content; ?>
+		<div class="ui container">
+            <?php echo $content; ?>
 		</div>
 
-		<footer class="fixed-bottom">
-			<div class="container">
-				<p class="text-center">CMS Cilaster • 2017 • by <span class="text-uppercase">JM Organization</span></p>
+		<footer class="ui sticky fixed bottom">
+			<div class="ui container">
+				<p>CMS Cilaster • 2017 • by <span class="text-uppercase">JM Organization</span></p>
 			</div>
 		</footer>
 
