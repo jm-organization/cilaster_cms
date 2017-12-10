@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "565d3f101b9ac6d8cd9e1d67dbcbc879",
+    "content-hash": "f19680b56c5415a67c33c132e44c8cb4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -608,16 +608,16 @@
         },
         {
             "name": "jm-organization/cilaster_framework",
-            "version": "0.5.8",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jm-organization/cilaster_framework.git",
-                "reference": "d3ecd24421865ece37d79f17ceee36fe501ccd0c"
+                "reference": "f00c5d3378139e5185a01f40e0eb5c04bd2621ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jm-organization/cilaster_framework/zipball/d3ecd24421865ece37d79f17ceee36fe501ccd0c",
-                "reference": "d3ecd24421865ece37d79f17ceee36fe501ccd0c",
+                "url": "https://api.github.com/repos/jm-organization/cilaster_framework/zipball/f00c5d3378139e5185a01f40e0eb5c04bd2621ef",
+                "reference": "f00c5d3378139e5185a01f40e0eb5c04bd2621ef",
                 "shasum": ""
             },
             "require": {
@@ -642,13 +642,13 @@
                     "Cilaster\\Cli\\": "Cli/"
                 },
                 "files": [
-                    "cilaster.php",
+                    "installed.php",
                     "Core/constants.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache-2.0"
+                "MIT"
             ],
             "description": "PHP Framework",
             "homepage": "http://www.jm-org.net/portfolio/cilaster",
@@ -658,7 +658,7 @@
                 "jm-organization",
                 "php"
             ],
-            "time": "2017-12-10T12:31:49+00:00"
+            "time": "2017-12-10T18:14:15+00:00"
         },
         {
             "name": "psr/log",

@@ -9,11 +9,11 @@
  * @documentation:
  */
 
-namespace MVC\Admin;
+namespace Module\Admin;
 
 
-use API\Model;
+use Cilaster\API\Model;
 
-class AdminModel extends Model{
+class AdminModel extends Model {
 
 }

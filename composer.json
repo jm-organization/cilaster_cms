@@ -12,9 +12,11 @@
   "license": "GPL-3.0",
   "require": {
     "php": "^5.6",
-    "jm-organization/cilaster_framework": "0.5.*"
+    "jm-organization/cilaster_framework": ">=0.7"
   },
   "autoload": {
-    "files": [ "cilaster.php" ]
+    "psr-4": {
+      "Module\\": "modules/"
+    }
   }
 }

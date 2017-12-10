@@ -9,7 +9,7 @@
  * @documentation:
  */
 
-namespace Cilaster\MVC\Admin;
+namespace Module\Admin;
 
 
 use Cilaster\API\View;

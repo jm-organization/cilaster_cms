@@ -9,7 +9,7 @@
  * @documentation:
  */
 
-namespace Cilaster\MVC\Auth;
+namespace Module\Auth;
 
 
 use Cilaster\API\Model;

@@ -33,7 +33,11 @@ return [
 
 			'rest' => [
 				'rest' => [
-
+					'options' => [
+						'route' => '/[:action.php]',
+						'action' => 'rest',
+						'module' => '',
+					],
 				],
 			],
 
